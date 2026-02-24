@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import GroceryItem
+from django.contrib import messages
+
 
 def index(request):
     """Display all grocery items"""
@@ -19,14 +21,17 @@ def edit_item(request, item_id):
     return redirect(f"/?edit={item_id}")
 
 def update_item(request, item_id):
-    """Update an existing grocery item name"""
     if request.method == 'POST':
         item = get_object_or_404(GroceryItem, id=item_id)
         name = request.POST.get('name', '').strip()
 
-        if name:
-            item.name = name
-            item.save()
+        if not name:
+            messages.error(request, 'Please provide a value')
+            return redirect('grocery:index')
+
+        item.name = name
+        item.save()
+        messages.success(request, 'Item Updated Successfully!')
 
     return redirect('grocery:index')
 
@@ -44,6 +49,7 @@ def delete_item(request, item_id):
     if request.method == 'POST':
         item = get_object_or_404(GroceryItem, id=item_id)
         item.delete()
+        messages.success(request, 'Item Deleted Successfully!')
 
     return redirect('grocery:index')
 
@@ -52,7 +58,11 @@ def add_item(request):
     if request.method == 'POST':
         name = request.POST.get('name', '').strip()
 
-        if name:
-            GroceryItem.objects.create(name=name)
+        if not name:
+            messages.error(request, 'Please provide a value')
+            return redirect('grocery:index')
+        
+        GroceryItem.objects.create(name=name)
+        messages.success(request, 'Item Added Successfully!')
 
     return redirect('grocery:index')
