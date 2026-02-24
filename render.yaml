@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: grocery-bud-django        # name of your app on Render
+    env: python
+    plan: free
+    branch: main                    # branch to deploy
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn djangocrud.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: 'False'
+      - key: ALLOWED_HOSTS
+        value: grocery-bud-django.onrender.com
+    autoDeploy: true
