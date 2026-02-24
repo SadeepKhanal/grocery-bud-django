@@ -17,10 +17,14 @@
   <body>
     <section class="section-center">
   {% if messages %}
+  <div id="messages-container">
     {% for message in messages %}
-      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
     {% endfor %}
-  {% endif %}
+  </div>
+{% endif %}
 
   
       <form method="POST"
@@ -73,5 +77,15 @@
   {% endfor %}
 </div>
     </section>
+    <script>
+  
+  const alerts = document.querySelectorAll('.alert');
+  alerts.forEach(alert => {
+    setTimeout(() => { 
+      alert.style.opacity = '0';
+      setTimeout(() => alert.remove(), 500);
+    }, 3000);
+  });
+</script>
   </body>
 </html>
