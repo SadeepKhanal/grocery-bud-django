@@ -116,14 +116,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-import os
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-STATICFILES_DIRS = []
-
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+# DO NOT use STATICFILES_DIRS unless you actually have a project-level static folder
