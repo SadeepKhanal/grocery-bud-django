@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-(0w#6ors_*&f^&!)xh!^x+cyp1@8aj3duzde=&!2ff(ixtjew4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG ='RENDER' not in os.environ
 
-ALLOWED_HOSTS = ["grocery-bud-django.onrender.com","127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["grocery-bud-django.onrender.com","127.0.0.1", "localhost","grocery.onrender.com","grocery-bud.onrender.com"]
 
 
 # Application definition
