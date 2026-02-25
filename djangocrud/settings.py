@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(0w#6ors_*&f^&!)xh!^x+cyp1@8aj3duzde=&!2ff(ixtjew4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["grocery-bud-django.onrender.com","127.0.0.1", "localhost"]
 
@@ -122,6 +122,6 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # This directory will hold all collected static files
 
 # DO NOT use STATICFILES_DIRS unless you actually have a project-level static folder
