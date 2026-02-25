@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(0w#6ors_*&f^&!)xh!^x+cyp1@8aj3duzde=&!2ff(ixtjew4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("RENDER") is None
 
 ALLOWED_HOSTS = ["grocery-bud-django.onrender.com","127.0.0.1", "localhost"]
 
@@ -116,12 +117,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-from pathlib import Path
-import os
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # This directory will hold all collected static files
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage" # This directory will hold all collected static files
 
 # DO NOT use STATICFILES_DIRS unless you actually have a project-level static folder
